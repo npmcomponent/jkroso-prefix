@@ -1,20 +1,31 @@
 
 # prefix
 
-  get style prefixed name
+  add a vendor prefix to a css attribute
 
 ## Installation
 
-    $ component install pgherveou/prefix
+_With [packin](//github.com/jkroso/packin) or [component](//github.com/component/component)_
+
+    $ packin add jkroso/prefix
+
+then in your app:
+
+```js
+var prefix = require('prefix')
+```
 
 ## API
 
+### prefix(key)
+  
+  Prefix `key`. This function memoizes its results so you don't need to worry about any performance issues, just treat it like a map.
+
 ```js
-var prefix = require('prefix');
-prefix('transform'); // return prefixed style eg: webkitTransform
-prefix('transform', true); // return prefixed dasherized style eg -webkit-transform
+prefix('transform') // => webkitTransform
+prefix('color') // => color
 ```
 
-## License
+## Running the tests
 
-  MIT
+Just run `make` and navigate your browser to the test directory.

@@ -1,43 +1,26 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Prefix Test</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="mocha/mocha.css"/>
-  </head>
-  <body>
-    <div id="mocha"></div>
-    <script src="../build/build.js"></script>
-    <script src="mocha/mocha.js"></script>
-    <script>
-      mocha.setup('bdd')
-      var prefix = require('prefix');
+<head>
+	<meta charset="utf-8">
+	<title>prefix tests</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+</head>
+<body>
+	<div id="mocha"></div>
+	<script>
+		var mocha = require('mocha')
 
-      function assert(expr, msg) {
-        if (!expr) throw new Error(msg || 'failed');
-      }
+		mocha.setup({
+			reporter: 'html',
+			timeout: 200,
+			bail: true,
+			ui: 'bdd'
+		})
 
-      describe('prefix', function() {
-        it ('should return the property for classic dom style like border', function() {
-          var ppty = prefix('border');
-          assert(ppty == 'border', 'expect "' + ppty + '" to be "border"');
-        });
-        it ('may return a prefixed dom style for css3 style like transform', function() {
-          var ppty = prefix('transform');
-          assert(ppty.indexOf(ppty) !== -1);
-          assert(ppty.indexOf('ransform') !== -1, 'expect (t)"ransform" to be in "' + ppty + '"');
-        });
-        it ('should return a dasherized prefixed dom style', function() {
-          var ppty = prefix('borderRadius', true);
-          assert(ppty.indexOf(ppty) !== -1);
-          assert(ppty.indexOf('border-radius') !== -1, 'expect "border-radius" to be in "' + ppty + '"');
-        });
-        it ('should return an empty string for fake style', function() {
-          var ppty = prefix('foo');
-          assert(ppty == '', 'expect ' + ppty + ' to be empty');
-        });
-      });
+		require('./prefix.test')
 
-      mocha.run();
-    </script>
-  </body>
+		mocha.run()
+	</script>
+</body>
 </html>

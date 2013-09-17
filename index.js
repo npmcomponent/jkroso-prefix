@@ -1,51 +1,50 @@
-// module globals
 
-var prefixes = ['webkit','Moz','ms','O']
-  , len = prefixes.length
-  , p = document.createElement('p')
-  , style = p.style
-  , capitalize = function (str) {return str.charAt(0).toUpperCase() + str.slice(1);}
-  , dasherize = function(str) {
-      return str.replace(/([A-Z])/g, function(str,m1) {
-        return '-' + m1.toLowerCase();
-      });
-    };
+var style = document.createElement('p').style
+var prefixes = 'O ms Moz webkit'.split(' ')
 
-// nullify p to release dom node
-p = null;
+var memo = {}
 
 /**
- * get prefix for dom style
+ * memoized `prefix`
  *
- * example
- *   prefix('transform') // webkitTransform
- *   prefix('transform', true) // -webkit-transform
- *
- * @param  {String}   ppty dom style
- * @param  {Boolean}  dasherize
- * @return {String}   prefixed ppty
+ * @param {String} key
+ * @return {String}
  * @api public
  */
 
-module.exports = function(ppty, dasherized) {
-  var Ppty, name, Name;
+module.exports = exports = function(key){
+	return key in memo
+		? memo[key]
+		: memo[key] = prefix(key)
+}
 
-  // test without prefix
-  if (style[ppty] !== undefined) {
-    if (!dasherized) return ppty;
-    return dasherize(ppty);
-  }
+exports.prefix = prefix
 
-  // test with prefix
-  Ppty = capitalize(ppty);
-  for (i = 0; i < len; i++) {
-    name = prefixes[i] + Ppty;
-    if (style[name] !== undefined) {
-      if (!dasherized) return name;
-      return '-' + prefixes[i].toLowerCase() + '-' + dasherize(ppty);
-    }
-  }
+/**
+ * prefix `key`
+ *
+ *   prefix('transform') // => webkitTransform
+ *
+ * @param {String} key
+ * @return {String}
+ * @api public
+ */
 
-  // not found return empty string
-  return '';
-};
+function prefix(key){
+	// without prefix
+	if (style[key] !== undefined) return key
+
+	// with prefix
+	var Key = capitalize(key)
+	var i = prefixes.length
+	while (i--) {
+		var name = prefixes[i] + Key
+		if (style[name] !== undefined) return name
+	}
+
+	throw new Error('unable to prefix ' + key)
+}
+
+function capitalize(str){
+	return str.charAt(0).toUpperCase() + str.slice(1)
+}

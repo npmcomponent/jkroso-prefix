@@ -1,11 +1,12 @@
 
-build: components index.js
-	@component build --dev
+serve: node_modules
+	@node_modules/serve/bin/serve -Sloj
 
-components: component.json
-	@component install --dev
+node_modules: component.json package.json
+	@packin install \
+		--meta package.json,component.json,deps.json \
+		--folder node_modules \
+		--executables \
+		--no-retrace
 
-clean:
-	rm -fr build components template.js
-
-.PHONY: clean
+.PHONY: serve
