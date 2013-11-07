@@ -1,9 +1,8 @@
 {
   "name": "prefix",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "prefix a css attribute",
   "dependencies": {},
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/jkroso/prefix.git"

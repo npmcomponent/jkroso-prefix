@@ -1,6 +1,7 @@
 
 var assert = require('assert/index')
 var prefix = require('..')
+var dash = prefix.dash
 
 describe('prefix', function(){
 	it ('should not prefix things which don\'t need prefixes', function(){
@@ -22,6 +23,18 @@ describe('prefix', function(){
 		try { prefix('something fucked up') }
 		catch (e) { return }
 		throw new Error('should not get here')
+	})
+})
+
+describe('dash', function(){
+	it('should create a dasherized string', function(){
+		assert(dash('transform') in {
+			'-webkit-transform': null,
+			'-moz-transform': null,
+			'-ms-transform': null,
+			'-o-transform': null,
+			'transform': null
+		})
 	})
 })
 

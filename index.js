@@ -1,6 +1,7 @@
 
 var style = document.createElement('p').style
 var prefixes = 'O ms Moz webkit'.split(' ')
+var upper = /([A-Z])/g
 
 var memo = {}
 
@@ -19,6 +20,7 @@ module.exports = exports = function(key){
 }
 
 exports.prefix = prefix
+exports.dash = dashedPrefix
 
 /**
  * prefix `key`
@@ -47,4 +49,18 @@ function prefix(key){
 
 function capitalize(str){
 	return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/**
+ * create a dasherized prefix
+ *
+ * @param {String} key
+ * @return {String}
+ * @api public
+ */
+
+function dashedPrefix(key){
+	key = prefix(key)
+	if (upper.test(key)) key = '-' + key.replace(upper, '-$1')
+	return key.toLowerCase()
 }
