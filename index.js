@@ -33,6 +33,11 @@ exports.dash = dashedPrefix
  */
 
 function prefix(key){
+  // camel case
+  key = key.replace(/-([a-z])/g, function(_, char){
+    return char.toUpperCase()
+  })
+
   // without prefix
   if (style[key] !== undefined) return key
 

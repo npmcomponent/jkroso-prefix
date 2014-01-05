@@ -8,10 +8,14 @@ describe('prefix', function(){
     assert(prefix('border') == 'border')
   })
 
+  it('should format dashed properties', function(){
+    assert(prefix('background-color') == 'backgroundColor')
+  })
+
   it ('may return a prefixed dom style for css3 style like transform', function(){
     assert(prefix('transform') in possibilities('transform'))
   })
-  
+
   it('should memoize results', function(){
     assert(prefix('border') == 'border')
     assert(prefix('border') == 'border')
