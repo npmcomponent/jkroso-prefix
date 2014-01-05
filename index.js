@@ -14,9 +14,9 @@ var memo = {}
  */
 
 module.exports = exports = function(key){
-	return key in memo
-		? memo[key]
-		: memo[key] = prefix(key)
+  return key in memo
+    ? memo[key]
+    : memo[key] = prefix(key)
 }
 
 exports.prefix = prefix
@@ -33,22 +33,22 @@ exports.dash = dashedPrefix
  */
 
 function prefix(key){
-	// without prefix
-	if (style[key] !== undefined) return key
+  // without prefix
+  if (style[key] !== undefined) return key
 
-	// with prefix
-	var Key = capitalize(key)
-	var i = prefixes.length
-	while (i--) {
-		var name = prefixes[i] + Key
-		if (style[name] !== undefined) return name
-	}
+  // with prefix
+  var Key = capitalize(key)
+  var i = prefixes.length
+  while (i--) {
+    var name = prefixes[i] + Key
+    if (style[name] !== undefined) return name
+  }
 
-	throw new Error('unable to prefix ' + key)
+  throw new Error('unable to prefix ' + key)
 }
 
 function capitalize(str){
-	return str.charAt(0).toUpperCase() + str.slice(1)
+  return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 /**
@@ -60,7 +60,7 @@ function capitalize(str){
  */
 
 function dashedPrefix(key){
-	key = prefix(key)
-	if (upper.test(key)) key = '-' + key.replace(upper, '-$1')
-	return key.toLowerCase()
+  key = prefix(key)
+  if (upper.test(key)) key = '-' + key.replace(upper, '-$1')
+  return key.toLowerCase()
 }
