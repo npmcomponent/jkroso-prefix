@@ -3,13 +3,13 @@
   "version": "0.2.0",
   "description": "prefix a css attribute",
   "dependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jkroso/prefix.git"
+  "devDependencies": {
+    "serve": "jkroso/serve#1.5.1",
+    "assert": "component/assert",
+    "mocha": "*"
   },
-  "bugs": {
-    "url": "https://github.com/jkroso/prefix/issues"
-  },
+  "repository": "git://github.com/jkroso/prefix.git",
+  "bugs": "https://github.com/jkroso/prefix/issues",
   "keywords": ["prefix"],
   "author": "Jake Rosoman",
   "license": "MIT",
